@@ -155,7 +155,7 @@ int testOptionPriceAmCallOneDividend(){
     double callAmPrice = optionPriceAmCallOneDividend(S,K,r,sigma,tau,D1,tau1);
     
     
-    std::cout<<"Call Price = "<<callAmPrice<<std::endl;
+    std::cout<<"Call Price one dividend = "<<callAmPrice<<std::endl;
   
     return 0;
 }
