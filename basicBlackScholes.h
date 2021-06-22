@@ -8,11 +8,11 @@
 #ifndef basicBlackScholes_h
 #define basicBlackScholes_h
 
+#include "norm.h"
 #include <math.h>
 #include <iostream>
 
-double N(double x);
-double n(double x);
+
 
 double option_price_call_BS(const double& S, const double& K, const double& r, const double& sigma, const double& time);
 
