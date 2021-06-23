@@ -159,3 +159,90 @@ int testOptionPriceAmCallOneDividend(){
   
     return 0;
 }
+
+double futuresOptionPriceEurCallBlack(const double& F,const double& K, const double& r, const double& sigma, const double& time){
+    
+    double sigma_sqr = sigma*sigma;
+    double time_sqrt = sqrt(time);
+    double d1 = (log(F/K) +0.5*sigma_sqr*time)/(sigma*time_sqrt);
+    double d2 = d1 - sigma*time_sqrt;
+    
+    return exp(-r*time)*(F*N(d1) - K*N(d2));
+}
+
+
+double futuresOptionPriceEurPutBlack(const double& F,const double& K, const double& r, const double& sigma, const double& time){
+    
+    double sigma_sqr = sigma*sigma;
+    double time_sqrt = sqrt(time);
+    double d1 = (log(F/K) +0.5*sigma_sqr*time)/(sigma*time_sqrt);
+    double d2 = d1 - sigma*time_sqrt;
+    
+    return exp(-r*time)*(-F*N(-d1) + K*N(-d2));
+}
+
+
+double currencyOptionPriceEurCall(const double& S, const double& X, const double& r, const double& r_f, const double& sigma, const double& time){
+    
+    double sigma_sqr = sigma*sigma;
+    double time_sqrt = sqrt(time);
+    double d1 = (log(S/X) +(r-r_f+ 0.5*sigma_sqr*time))/(sigma*time_sqrt);
+    double d2 = d1 - sigma*time_sqrt;
+    
+    return S*exp(-r_f*time)*N(d1) -X*exp(-r*time)*N(d2);
+
+}
+
+double optionPriceAmPerpetualCall(const double& S, const double& K, const double& r, const double& q, const double& sigma){
+    
+    
+    double sigma_sqr = sigma*sigma;
+    double h1 = 0.5-((r-q)/sigma_sqr);
+    h1 += sqrt(pow(((r-q)/sigma_sqr-0.5),2) +2.0*r/sigma_sqr);
+    double price = (K/(h1-1.0))*pow(((h1-1.0)/h1)*(S/K),h1);
+
+    return price;
+}
+
+int testFuturesOptionPriceEurBlack(){
+    
+    double F = 50.0;
+    double K = 45;
+    double r = 0.08;
+    double sigma = 0.2;
+    double time = 0.5;
+    
+    std::cout<<"European futures call option = "<<futuresOptionPriceEurCallBlack(F, K, r, sigma, time)<<std::endl;
+    
+    std::cout<<"European futures put option = "<<futuresOptionPriceEurPutBlack(F, K, r, sigma, time)<<std::endl;
+    
+    return 0;
+}
+
+
+int testCurrencyOptionPriceEurCall(){
+    
+    double S = 50.0;
+    double K = 52.0;
+    double r = 0.08;
+    double r_f = 0.05;
+    double sigma = 0.2;
+    double time = 0.5;
+    
+    std::cout<<"European currency call option = "<<currencyOptionPriceEurCall(S, K, r, r_f, sigma, time)<<std::endl;
+    
+    return 0;
+}
+
+int testOpptionPriceAmPerpetualCall(){
+    
+    double S = 50.0;
+    double K = 40.0;
+    double r = 0.05;
+    double q = 0.02;
+    double sigma = 0.05;
+    
+    std::cout<<"Perpetual American call = "<<optionPriceAmPerpetualCall(S, K, r, q, sigma)<<std::endl;
+    
+    return 0;
+}

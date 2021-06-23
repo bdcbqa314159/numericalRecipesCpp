@@ -9,6 +9,7 @@
 #define norm_h
 
 #include <math.h>
+#include <iostream>
 
 double sgn(const double& x);
 double f(const double& x, const double& y, const double& aprime, const double& bprime, const double& rho);

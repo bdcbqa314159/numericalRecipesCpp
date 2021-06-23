@@ -22,11 +22,25 @@ double optionPriceEurCallDividends(const double& S, const double& K, const doubl
 
 double optionPriceAmCallOneDividend(const double& S, const double& K, const double& r, const double& sigma, const double& tau, const double& D1,  const double& tau1);
 
+double futuresOptionPriceEurCallBlack(const double& F,const double& K, const double& r, const double& sigma, const double& time);
+
+double futuresOptionPriceEurPutBlack(const double& F,const double& K, const double& r, const double& sigma, const double& time);
+
+double currencyOptionPriceEurCall(const double& S, const double& X, const double& r, const double& r_f, const double& sigma, const double& time);
+
+double optionPriceAmPerpetualCall(const double& S, const double& K, const double& r, const double& q, const double& sigma);
+
 int testOptPriceEurPayout();
 
 int testOptPriceEurCallDividends();
 
 int testOptionPriceAmCallOneDividend();
+
+int testFuturesOptionPriceEurBlack();
+
+int testCurrencyOptionPriceEurCall();
+
+int testOpptionPriceAmPerpetualCall();
 
 
 
